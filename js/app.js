@@ -36,3 +36,27 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+ /* corpo contenedor do jQuery */
+ $(document).ready(function () {
+
+ /* função para desvirar as cartas*/
+let deck,carta,baralho;
+
+$('li').click(function() {
+    let classeCarta = $(this).attr('class');
+    if (classeCarta == 'card') {
+      $(this).toggleClass('open show');
+    }else if (classeCarta == 'card open show'){
+      alert('Carta já esta virada, selecione outra!');
+    } else {
+      alert('Carta ja tem seu par!');
+    }
+
+});
+
+
+
+});
+/* fim do corpo jQuery */
+
