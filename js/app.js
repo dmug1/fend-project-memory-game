@@ -39,20 +39,30 @@ function shuffle(array) {
 
  /* corpo contenedor do jQuery */
  $(document).ready(function () {
+   
+
+ /* timer para a carta ser exibida por tempo suficiente*/ 
+  function contagem( funcao ){
+     setTimeout(funcao, 1000);
+}
+
+
+
+
 
  /* função para desvirar as cartas*/
 let deck,carta,baralho;
 $("li").click(function() {
     let classeCarta = $(this).attr("class");
     if (classeCarta == "card") {
-      $(this).toggleClass("open show");
-      checaPar();
+      $(this).addClass("open show");
+      contagem(checaPar);
+      //checaPar();
     }else if (classeCarta == "card open show"){
       alert("Carta já esta virada, selecione outra!");
     } else {
       alert("Carta ja tem seu par!");
     }
-
 });
 
 
@@ -65,7 +75,7 @@ function checaPar(){
   pardecartas = $(".card.open.show");
   if (pardecartas.length < 2) {
       return;
-  }else if ($(pardecartas[0]).children().className == $(pardecartas[1]).children().className){ //needs a fix
+  }else if ($(pardecartas[0]).children(0)[0].className == $(pardecartas[1]).children(0)[0].className){
        pardecartas.each(function(index){
         $(pardecartas[index]).addClass("match"); 
         $(pardecartas[index]).removeClass("open show");
@@ -74,18 +84,11 @@ function checaPar(){
         })
     }else {     
       pardecartas.each(function(index){
-        $(pardecartas[index]).removeClass("open show");
+           $(pardecartas[index]).removeClass("open show");
       })
     }
-    
-    
   }
-
-
 
 
 });
 /* fim do corpo jQuery */
-
-
-
