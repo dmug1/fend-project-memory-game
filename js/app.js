@@ -37,7 +37,7 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-let deck,carta,baralho = [],viradas = 0;
+let baralho = [],viradas = 0, moves = 0;
 
  
  /* corpo contenedor do jQuery */
@@ -55,10 +55,10 @@ let deck,carta,baralho = [],viradas = 0;
 $("li").click(function() {
   let carta = $(this).attr("class");
   let tag = $(this);
-  debugger;
-
   if (viradas <2){
     virarCarta(carta,tag);
+    move ++;
+    console.log(move);
   }
 });
 
@@ -91,12 +91,22 @@ function checaPar(){
         $(pardecartas[index]).addClass("match"); 
         $(pardecartas[index]).removeClass("open show");
         viradas = 0;
+        baralho.push($(pardecartas[index]).children(0)[0].className);
+        console.log(baralho)
+        endGame()
         });
     }else {     
       pardecartas.each(function(index){
            $(pardecartas[index]).removeClass("open show");
            viradas = 0;
       });
+    }
+  }
+
+
+  function endGame(){
+    if (baralho.length == 16) {
+      alert('venceu!');
     }
   }
 
