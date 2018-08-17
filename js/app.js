@@ -28,7 +28,7 @@ function shuffle(array) {
 
 /*
  * set up the event listener for a card. If a card is clicked:
- *  - display the card"s symbol (put this functionality in another function that you call from this one)
+ *  - display the card"s symbol (put this functionality in another function that you call from this one) 
  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
  *  - if the list already has another card, check to see if the two cards match
  *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
@@ -37,33 +37,40 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+let deck,carta,baralho;
+
+ 
  /* corpo contenedor do jQuery */
  $(document).ready(function () {
    
 
- /* timer para a carta ser exibida por tempo suficiente*/ 
+ /* timer para a carta ser exibida por tempo suficiente*/
   function contagem( funcao ){
      setTimeout(funcao, 1000);
 }
 
-
-
+/*
+ *função de click, aqui ela chama a virada de cartas 
+ */
+$("li").click(function() {
+  let carta = $(this).attr("class");
+  let tag = $(this);
+  virarCarta(carta,tag);
+});
 
 
  /* função para desvirar as cartas*/
-let deck,carta,baralho;
-$("li").click(function() {
-    let classeCarta = $(this).attr("class");
-    if (classeCarta == "card") {
-      $(this).addClass("open show");
-      contagem(checaPar);
-      //checaPar();
-    }else if (classeCarta == "card open show"){
-      alert("Carta já esta virada, selecione outra!");
-    } else {
-      alert("Carta ja tem seu par!");
-    }
-});
+function virarCarta(classeCarta,tag){
+  if (classeCarta == "card") {
+    tag.addClass("open show");
+    
+    contagem(checaPar);
+  }else if (classeCarta == "card open show"){
+    alert("Carta já esta virada, selecione outra!");
+  } else {
+    alert("Carta ja tem seu par!");
+  }
+};
 
 
 /**
@@ -79,8 +86,6 @@ function checaPar(){
        pardecartas.each(function(index){
         $(pardecartas[index]).addClass("match"); 
         $(pardecartas[index]).removeClass("open show");
-        console.log("its a match")
-        return;
         })
     }else {     
       pardecartas.each(function(index){
