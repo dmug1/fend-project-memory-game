@@ -37,7 +37,7 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-let deck,carta,baralho;
+let deck,carta,baralho = [],viradas = 0;
 
  
  /* corpo contenedor do jQuery */
@@ -55,7 +55,11 @@ let deck,carta,baralho;
 $("li").click(function() {
   let carta = $(this).attr("class");
   let tag = $(this);
-  virarCarta(carta,tag);
+  debugger;
+
+  if (viradas <2){
+    virarCarta(carta,tag);
+  }
 });
 
 
@@ -63,14 +67,14 @@ $("li").click(function() {
 function virarCarta(classeCarta,tag){
   if (classeCarta == "card") {
     tag.addClass("open show");
-    
+    viradas ++;
     contagem(checaPar);
   }else if (classeCarta == "card open show"){
     alert("Carta já esta virada, selecione outra!");
   } else {
     alert("Carta ja tem seu par!");
   }
-};
+}
 
 
 /**
@@ -86,11 +90,13 @@ function checaPar(){
        pardecartas.each(function(index){
         $(pardecartas[index]).addClass("match"); 
         $(pardecartas[index]).removeClass("open show");
-        })
+        viradas = 0;
+        });
     }else {     
       pardecartas.each(function(index){
            $(pardecartas[index]).removeClass("open show");
-      })
+           viradas = 0;
+      });
     }
   }
 
