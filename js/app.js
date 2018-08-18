@@ -40,7 +40,8 @@ function shuffle(array) {
 
 let baralho = [],
   viradas = 0,
-  moves = 0;
+  moves = 0,
+  wrongCarta = [];
 
 
 /* corpo contenedor do jQuery */
@@ -118,7 +119,7 @@ $(document).ready(function () {
 
   /* função para virar as cartas*/
   function virarCarta(classeCarta, tagEfeito) {
-    if (classeCarta == "card") {
+  if (classeCarta == "card") {
       openCards(tagEfeito);
       showCards(tagEfeito);
       viradas++;
@@ -172,11 +173,31 @@ $(document).ready(function () {
       });
     } else {
       pardecartas.each(function (index) {
-        $(pardecartas[index]).removeClass("open show");
-        viradas = 0;
+        wrongCarta[index] = $(pardecartas[index]);
+        //$(pardecartas[index]).removeClass("open show wrong");
+        
       });
+      viradas = 0;
+      erro(wrongCarta);
+      //setTimeout(cartaErrada(wrongCarta),1200); 
+      setTimeout(function() {
+        cartaErrada(wrongCarta);
+    }, 1200);
     }
   }
+
+  /**necessario para fazer o swing das cartas */
+  function erro(wrongCarta){
+    $(wrongCarta[0]).addClass("wrong");
+    $(wrongCarta[1]).addClass("wrong");
+  }
+
+  /**remove classe carta aberta errada */
+  function cartaErrada(wrongCarta){
+    $(wrongCarta[0]).removeClass("open show wrong");
+    $(wrongCarta[1]).removeClass("open show wrong");
+  }
+
 
   /** esta função encerra o jogo */
   function endGame() {
