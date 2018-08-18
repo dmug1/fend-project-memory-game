@@ -159,6 +159,7 @@ $(document).ready(function () {
   /*funçao de checagem de match * */
   function checaPar() {
     let pardecartas;
+    //debugger;
     pardecartas = $(".card.open.show");
     if (pardecartas.length < 2) {
       return;
@@ -174,16 +175,17 @@ $(document).ready(function () {
     } else {
       pardecartas.each(function (index) {
         wrongCarta[index] = $(pardecartas[index]);
-        //$(pardecartas[index]).removeClass("open show wrong");
-        
       });
-      viradas = 0;
       erro(wrongCarta);
-      //setTimeout(cartaErrada(wrongCarta),1200); 
       setTimeout(function() {
-        cartaErrada(wrongCarta);
-    }, 1200);
-    }
+      cartaErrada(wrongCarta);
+      }, 1200);
+      setTimeout(function() {
+           viradas = 0;
+        }, 1500);
+     
+       
+  }
   }
 
   /**necessario para fazer o swing das cartas */
