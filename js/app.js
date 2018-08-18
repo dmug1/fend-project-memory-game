@@ -46,7 +46,7 @@ let baralho = [],viradas = 0, moves = 0;
 
   /* CLICK SOBRE O RESTART GAME  */
     $(".fa-repeat").click(function() {
-    restart()
+    restart();
   });
   
 /* RESTART GAME  */
@@ -56,7 +56,8 @@ let baralho = [],viradas = 0, moves = 0;
     viradas = 0;
     moves = 0;
     disporCartas(baralhoInicial);
-  };
+    estrelasAdicionar();
+  }
 
   /**ATRIBUIR CARTAS EMBARALHADAS */
   function disporCartas(array){
@@ -99,7 +100,8 @@ $("li").click(function() {
   if (viradas <2){
     virarCarta(carta,tagEfeito);
     moves ++;
-    scoreMoves(moves);
+    scoreMoves(moves);   
+    estrelas(moves);
   }
 });
 
@@ -118,11 +120,31 @@ function virarCarta(classeCarta,tagEfeito){
 }
 
 function scoreMoves(moves){
-    //let valor = $("span.moves").text();
-     //$( valor ).text(moves);
-     $("span.moves").text(moves);
-  
-};
+     $("span.moves").text(moves); 
+}
+
+function estrelasRemover(indice,stars){
+   $(stars[indice]).addClass("hide");
+   //$(pardecartas[index]).addClass("match"); 
+}
+
+function estrelasAdicionar(){
+  let stars;
+  stars = $("ul.stars").children().children();
+  $(stars).removeClass("hide");
+}
+
+function estrelas(movimentos){
+  let stars;
+  stars = $("ul.stars").children().children();
+   if (movimentos == 20){
+     estrelasRemover(0,stars);
+   }else if(movimentos == 30){
+    estrelasRemover(1,stars);
+   } else if (movimentos >=38){
+    estrelasRemover(2,stars);
+   }
+}
 
 /*funçao de checagem de match * */
 function checaPar(){
