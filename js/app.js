@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-
+let baralhoInicial = ["fa fa-bolt", "fa fa-bolt", "fa fa-bicycle", "fa fa-bicycle", "fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-leaf", "fa fa-leaf", "fa fa-anchor", "fa fa-anchor", "fa fa-bomb", "fa fa-bomb", "fa fa-cube", "fa fa-cube"];
 
 /*
  * Display the cards on the page
@@ -42,7 +42,48 @@ let baralho = [],viradas = 0, moves = 0;
  
  /* corpo contenedor do jQuery */
  $(document).ready(function () {
-   
+  restart();
+
+  /* CLICK SOBRE O RESTART GAME  */
+    $(".fa-repeat").click(function() {
+    restart()
+  });
+  
+/* RESTART GAME  */
+  function restart(){
+    shuffle(baralhoInicial);
+    baralho = [];
+    viradas = 0;
+    moves = 0;
+    disporCartas(baralhoInicial);
+  };
+
+  /**ATRIBUIR CARTAS EMBARALHADAS */
+  function disporCartas(array){
+    let cards;
+    cards = $(".card");
+    esconderCartas();
+    cards.children().each(function(index){
+    $(cards[index]).children().removeClass();
+    $(cards[index]).children().addClass(array[index]);
+    });
+    }
+
+    /* ESCONDER CARTAS */
+    function esconderCartas(){
+      let cartaVoltaOpen;
+      cartaVoltaOpen = $(".card.open.show") ;   
+      cartaVoltaOpen.each(function(index){
+        $(cartaVoltaOpen[index]).removeClass("open show");
+        viradas = 0;
+      });      
+      let cartaVoltaMatch;
+      cartaVoltaMatch = $(".match") ;   
+      cartaVoltaMatch.each(function(index){
+        $(cartaVoltaMatch[index]).removeClass("match");
+        viradas = 0;
+      });
+    }
 
  /* timer para a carta ser exibida por tempo suficiente*/
   function contagem( funcao ){
@@ -54,19 +95,19 @@ let baralho = [],viradas = 0, moves = 0;
  */
 $("li").click(function() {
   let carta = $(this).attr("class");
-  let tag = $(this);
+  let tagEfeito = $(this);
   if (viradas <2){
-    virarCarta(carta,tag);
-    move ++;
-    console.log(move);
+    virarCarta(carta,tagEfeito);
+    moves ++;
+    console.log(moves);
   }
 });
 
 
- /* função para desvirar as cartas*/
-function virarCarta(classeCarta,tag){
+ /* função para virar as cartas*/
+function virarCarta(classeCarta,tagEfeito){
   if (classeCarta == "card") {
-    tag.addClass("open show");
+    tagEfeito.addClass("open show");
     viradas ++;
     contagem(checaPar);
   }else if (classeCarta == "card open show"){
@@ -77,10 +118,7 @@ function virarCarta(classeCarta,tag){
 }
 
 
-/**
- * funçao de checagem
- * aqui são mudadas as classes caso sucesso
- */
+/*funçao de checagem de match * */
 function checaPar(){
   let pardecartas;
   pardecartas = $(".card.open.show");
@@ -92,8 +130,8 @@ function checaPar(){
         $(pardecartas[index]).removeClass("open show");
         viradas = 0;
         baralho.push($(pardecartas[index]).children(0)[0].className);
-        console.log(baralho)
-        endGame()
+        console.log(baralho);
+        endGame();
         });
     }else {     
       pardecartas.each(function(index){
