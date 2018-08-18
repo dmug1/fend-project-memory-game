@@ -99,7 +99,7 @@ $("li").click(function() {
   if (viradas <2){
     virarCarta(carta,tagEfeito);
     moves ++;
-    console.log(moves);
+    scoreMoves(moves);
   }
 });
 
@@ -117,6 +117,12 @@ function virarCarta(classeCarta,tagEfeito){
   }
 }
 
+function scoreMoves(moves){
+    //let valor = $("span.moves").text();
+     //$( valor ).text(moves);
+     $("span.moves").text(moves);
+  
+};
 
 /*funçao de checagem de match * */
 function checaPar(){
@@ -141,10 +147,14 @@ function checaPar(){
     }
   }
 
-
+/** esta função encerra o jogo */
   function endGame(){
     if (baralho.length == 16) {
       alert('venceu!');
+      baralho = [];
+      viradas = 0;
+      moves = 0;
+      restart();
     }
   }
 
