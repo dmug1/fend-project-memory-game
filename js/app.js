@@ -12,17 +12,18 @@ let baralhoInicial = ["fa fa-bolt", "fa fa-bolt", "fa fa-bicycle", "fa fa-bicycl
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+  var currentIndex = array.length,
+    temporaryValue, randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
 
-    return array;
+  return array;
 }
 
 
@@ -37,20 +38,22 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-let baralho = [],viradas = 0, moves = 0;
+let baralho = [],
+  viradas = 0,
+  moves = 0;
 
- 
- /* corpo contenedor do jQuery */
- $(document).ready(function () {
+
+/* corpo contenedor do jQuery */
+$(document).ready(function () {
   restart();
 
   /* CLICK SOBRE O RESTART GAME  */
-    $(".fa-repeat").click(function() {
+  $(".fa-repeat").click(function () {
     restart();
   });
-  
-/* RESTART GAME  */
-  function restart(){
+
+  /* RESTART GAME  */
+  function restart() {
     shuffle(baralhoInicial);
     baralho = [];
     viradas = 0;
@@ -60,117 +63,123 @@ let baralho = [],viradas = 0, moves = 0;
   }
 
   /**ATRIBUIR CARTAS EMBARALHADAS */
-  function disporCartas(array){
+  function disporCartas(array) {
     let cards;
     cards = $(".card");
     esconderCartas();
-    cards.children().each(function(index){
-    $(cards[index]).children().removeClass();
-    $(cards[index]).children().addClass(array[index]);
+    cards.children().each(function (index) {
+      $(cards[index]).children().removeClass();
+      $(cards[index]).children().addClass(array[index]);
     });
-    }
-
-    /* ESCONDER CARTAS */
-    function esconderCartas(){
-      let cartaVoltaOpen;
-      cartaVoltaOpen = $(".card.open.show") ;   
-      cartaVoltaOpen.each(function(index){
-        $(cartaVoltaOpen[index]).removeClass("open show");
-        viradas = 0;
-      });      
-      let cartaVoltaMatch;
-      cartaVoltaMatch = $(".match") ;   
-      cartaVoltaMatch.each(function(index){
-        $(cartaVoltaMatch[index]).removeClass("match");
-        viradas = 0;
-      });
-    }
-
- /* timer para a carta ser exibida por tempo suficiente*/
-  function contagem( funcao ){
-     setTimeout(funcao, 1000);
-}
-
-/*
- *função de click, aqui ela chama a virada de cartas 
- */
-$("li").click(function() {
-  let carta = $(this).attr("class");
-  let tagEfeito = $(this);
-  if (viradas <2){
-    virarCarta(carta,tagEfeito);
-    moves ++;
-    scoreMoves(moves);   
-    estrelas(moves);
   }
-});
 
-
- /* função para virar as cartas*/
-function virarCarta(classeCarta,tagEfeito){
-  if (classeCarta == "card") {
-    tagEfeito.addClass("open show");
-    viradas ++;
-    contagem(checaPar);
-  }else if (classeCarta == "card open show"){
-    alert("Carta já esta virada, selecione outra!");
-  } else {
-    alert("Carta ja tem seu par!");
+  /* ESCONDER CARTAS */
+  function esconderCartas() {
+    let cartaVoltaOpen;
+    cartaVoltaOpen = $(".card.open.show");
+    cartaVoltaOpen.each(function (index) {
+      $(cartaVoltaOpen[index]).removeClass("open show");
+      viradas = 0;
+    });
+    let cartaVoltaMatch;
+    cartaVoltaMatch = $(".match");
+    cartaVoltaMatch.each(function (index) {
+      $(cartaVoltaMatch[index]).removeClass("match");
+      viradas = 0;
+    });
   }
-}
 
-function scoreMoves(moves){
-     $("span.moves").text(moves); 
-}
+  /* timer para a carta ser exibida por tempo suficiente*/
+  function contagem(funcao) {
+    setTimeout(funcao, 1900);
+  }
 
-function estrelasRemover(indice,stars){
-   $(stars[indice]).addClass("hide");
-   //$(pardecartas[index]).addClass("match"); 
-}
+  /*
+   *função de click, aqui ela chama a virada de cartas 
+   */
+  $("li").click(function () {
+    let carta = $(this).attr("class");
+    let tagEfeito = $(this);
+    if (viradas < 2) {
+      virarCarta(carta, tagEfeito);
+      moves++;
+      scoreMoves(moves);
+      estrelas(moves);
+    }
+  });
 
-function estrelasAdicionar(){
-  let stars;
-  stars = $("ul.stars").children().children();
-  $(stars).removeClass("hide");
-}
+  function showCards(tagEfeito) {
+    setTimeout(tagEfeito.addClass("show"), 1000);
+  }
 
-function estrelas(movimentos){
-  let stars;
-  stars = $("ul.stars").children().children();
-   if (movimentos == 20){
-     estrelasRemover(0,stars);
-   }else if(movimentos == 30){
-    estrelasRemover(1,stars);
-   } else if (movimentos >=38){
-    estrelasRemover(2,stars);
-   }
-}
+  function openCards(tagEfeito) {
+    tagEfeito.addClass("open");
+  }
 
-/*funçao de checagem de match * */
-function checaPar(){
-  let pardecartas;
-  pardecartas = $(".card.open.show");
-  if (pardecartas.length < 2) {
+  /* função para virar as cartas*/
+  function virarCarta(classeCarta, tagEfeito) {
+    if (classeCarta == "card") {
+      openCards(tagEfeito);
+      showCards(tagEfeito);
+      viradas++;
+      contagem(checaPar);
+    } else if (classeCarta == "card open show") {
+      alert("Carta já esta virada, selecione outra!");
+    } else {
+      alert("Carta ja tem seu par!");
+    }
+  }
+
+  function scoreMoves(moves) {
+    $("span.moves").text(moves);
+  }
+
+  function estrelasRemover(indice, stars) {
+    $(stars[indice]).addClass("hide");
+    //$(pardecartas[index]).addClass("match"); 
+  }
+
+  function estrelasAdicionar() {
+    let stars;
+    stars = $("ul.stars").children().children();
+    $(stars).removeClass("hide");
+  }
+
+  function estrelas(movimentos) {
+    let stars;
+    stars = $("ul.stars").children().children();
+    if (movimentos == 20) {
+      estrelasRemover(0, stars);
+    } else if (movimentos == 35) {
+      estrelasRemover(1, stars);
+    } 
+  }
+
+  /*funçao de checagem de match * */
+  function checaPar() {
+    let pardecartas;
+    pardecartas = $(".card.open.show");
+    if (pardecartas.length < 2) {
       return;
-  }else if ($(pardecartas[0]).children(0)[0].className == $(pardecartas[1]).children(0)[0].className){
-       pardecartas.each(function(index){
-        $(pardecartas[index]).addClass("match"); 
+    } else if ($(pardecartas[0]).children(0)[0].className == $(pardecartas[1]).children(0)[0].className) {
+      pardecartas.each(function (index) {
+        $(pardecartas[index]).addClass("match");
         $(pardecartas[index]).removeClass("open show");
         viradas = 0;
         baralho.push($(pardecartas[index]).children(0)[0].className);
         console.log(baralho);
         endGame();
-        });
-    }else {     
-      pardecartas.each(function(index){
-           $(pardecartas[index]).removeClass("open show");
-           viradas = 0;
+      });
+    } else {
+      pardecartas.each(function (index) {
+        $(pardecartas[index]).removeClass("open show");
+        viradas = 0;
       });
     }
   }
 
-/** esta função encerra o jogo */
-  function endGame(){
+  /** esta função encerra o jogo */
+  function endGame() {
     if (baralho.length == 16) {
       alert('venceu!');
       baralho = [];
