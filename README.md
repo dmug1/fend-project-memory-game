@@ -30,3 +30,10 @@ O Gif utilizado no modal foi coletado em http://gifimage.net/check-mark-animated
 
 Para a função de conversao segundos para hora, utilizei como base a resposta do stack overflow funcação fmtMSS
 https://stackoverflow.com/questions/3733227/javascript-seconds-to-minutes-and-seconds
+
+Para função boing:
+https://codepen.io/CJStroud/pen/kkWQxY
+
+Para a função swing:
+https://www.tutorialspoint.com/css/css_animation_swing.htm
+http://www.javascriptkit.com/dhtmltutors/css3-animation-swing.shtml
