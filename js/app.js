@@ -42,7 +42,9 @@ let baralho = [],
   viradas = 0,
   moves = 0,
   wrongCarta = [],
-  modalEstrelas = 3;
+  modalEstrelas = 3,
+  tempo = 0,
+  parar = false;
 
 
 /* corpo contenedor do jQuery */
@@ -60,7 +62,9 @@ let baralho = [],
     baralho = [];
     viradas = 0;
     moves = 0;
-    modalEstrelas = 3
+    modalEstrelas = 3;
+    parar = false;
+    tempo = 0;
     disporCartas(baralhoInicial);
     estrelasAdicionar();
   }
@@ -210,6 +214,7 @@ let baralho = [],
       viradas = 0;
       moves = 0;
       restart();
+      contadorParar()
       exibirModal();
     }
   }
@@ -235,4 +240,33 @@ function apertouBotao() {
     //debugger;
     modal.style.display = "none";
     restart();
+}
+
+/**
+ * daqui para baixo temos as funções para contagem de tempo
+ */
+
+let contar = setInterval(contadorTempo,1000);
+
+function contadorParar() {
+  clearInterval(contar);
+}
+
+function contadorTempo(){
+   if (parar == false){
+   tempo ++;
+  let date = new Date(null);
+  date.setSeconds(tempo);
+  let utc = date.toUTCString();
+  let time = date.getUTCHours() + ':' + date.getUTCMinutes() + ':' +  date.getUTCSeconds();
+  teste = time;  
+  textoContador(teste);
+  } else {
+   textoContador(teste);
+    contadorParar();
+  }
+}
+
+function textoContador(teste){
+  $("span.tempo").text(teste);
 }

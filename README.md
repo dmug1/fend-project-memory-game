@@ -27,3 +27,6 @@ Para o correto funcionamento das animaçoes foram adicionados os seguintes itens
     @keyframes boing 
 
 O Gif utilizado no modal foi coletado em http://gifimage.net/check-mark-animated-gif-3/
+
+Para a função de conversao segundos para hora, utilizei como base a resposta do stack overflow funcação fmtMSS
+https://stackoverflow.com/questions/3733227/javascript-seconds-to-minutes-and-seconds
