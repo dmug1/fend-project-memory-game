@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
@@ -80,7 +81,34 @@
             </li>
         </ul>
     </div>
+
+    <!-- começo do modal -->
+<div id="modal-contenedor" class="modal">
+      <div class="modalzinho">
+      <div class="container">
+     <figure>
+        <picture>
+        <img src="img/ok.gif" alt="Simbolo de checado em verde" width="150px">
+        </picture>
+    </figure>
+      <h1 id="titulo-modal">Parabéns você concluiu o jogo!</h1>
+      <p>
+          Você utilizou <span class="moves"></span> movimentos e atingiu <span class="estrelas"></span> estrelas.
+    </p>
+      <p>
+          Aeeeeeeeehooooo!
+    </p>
+    <div>
+        <input type="button" id="denovo" value="Vamos de novo!" onclick="apertouBotao()">
+    </div>
+    </div>
+    </div>  
+  </div>
+   <!-- fim do modal-->
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
+
+

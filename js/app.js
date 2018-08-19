@@ -41,11 +41,12 @@ function shuffle(array) {
 let baralho = [],
   viradas = 0,
   moves = 0,
-  wrongCarta = [];
+  wrongCarta = [],
+  modalEstrelas = 3;
 
 
 /* corpo contenedor do jQuery */
-$(document).ready(function () {
+//$(document).ready(function () {
   restart();
 
   /* CLICK SOBRE O RESTART GAME  */
@@ -59,6 +60,7 @@ $(document).ready(function () {
     baralho = [];
     viradas = 0;
     moves = 0;
+    modalEstrelas = 3
     disporCartas(baralhoInicial);
     estrelasAdicionar();
   }
@@ -137,6 +139,7 @@ $(document).ready(function () {
 
   function estrelasRemover(indice, stars) {
     $(stars[indice]).addClass("hide");
+    modalEstrelas --;
     //$(pardecartas[index]).addClass("match"); 
   }
 
@@ -159,7 +162,6 @@ $(document).ready(function () {
   /*funçao de checagem de match * */
   function checaPar() {
     let pardecartas;
-    //debugger;
     pardecartas = $(".card.open.show");
     if (pardecartas.length < 2) {
       return;
@@ -204,14 +206,33 @@ $(document).ready(function () {
   /** esta função encerra o jogo */
   function endGame() {
     if (baralho.length == 16) {
-      alert('venceu!');
       baralho = [];
       viradas = 0;
       moves = 0;
       restart();
+      exibirModal();
     }
   }
 
 
-});
-/* fim do corpo jQuery */
+//});
+
+
+/*scritps relacionados ao MODAL */
+let modal = document.getElementById('modal-contenedor');
+let span = document.getElementsByClassName("fechar")[0];
+
+function estrelaModal(modalEstrelas){
+   $("span.estrelas").text(modalEstrelas);
+}
+
+function exibirModal() {
+    estrelaModal(modalEstrelas);
+    modal.style.display = "block";
+}
+
+function apertouBotao() {
+    //debugger;
+    modal.style.display = "none";
+    restart();
+}
