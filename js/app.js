@@ -46,7 +46,7 @@ let baralho = [],
   tempo = 0,
   parar = false;
 
-
+  let contar = setInterval(contadorTempo,1000);
 /* corpo contenedor do jQuery */
 //$(document).ready(function () {
   restart();
@@ -69,6 +69,8 @@ let baralho = [],
     disporCartas(baralhoInicial);
     estrelasAdicionar();
     textoContador(tempo);
+    contadorParar();
+    contar = setInterval(contadorTempo,1000);
   }
 
   /**ATRIBUIR CARTAS EMBARALHADAS */
@@ -249,7 +251,7 @@ function apertouBotao() {
  */
 
 
-let contar = setInterval(contadorTempo,1000);
+
 
 function contadorParar() {
   clearInterval(contar);
