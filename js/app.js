@@ -65,8 +65,10 @@ let baralho = [],
     modalEstrelas = 3;
     parar = false;
     tempo = 0;
+    scoreMoves(0);
     disporCartas(baralhoInicial);
     estrelasAdicionar();
+    textoContador(tempo);
   }
 
   /**ATRIBUIR CARTAS EMBARALHADAS */
@@ -213,9 +215,9 @@ let baralho = [],
       baralho = [];
       viradas = 0;
       moves = 0;
-      restart();
-      contadorParar()
+      contadorParar();
       exibirModal();
+      //restart();
     }
   }
 
@@ -245,6 +247,7 @@ function apertouBotao() {
 /**
  * daqui para baixo temos as funções para contagem de tempo
  */
+
 
 let contar = setInterval(contadorTempo,1000);
 

@@ -37,3 +37,14 @@ https://codepen.io/CJStroud/pen/kkWQxY
 Para a função swing:
 https://www.tutorialspoint.com/css/css_animation_swing.htm
 http://www.javascriptkit.com/dhtmltutors/css3-animation-swing.shtml
+
+Dependecias do Projeto:
+    Font Awesom:
+        -Declado na linha 7 através de:
+        <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+   
+   GoogleFonts
+        -Declarado na linhas 8 e 9 través de:
+        <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+    
